@@ -1,23 +1,15 @@
 {
   "age": {
-    "qi": true,
-    "category": false
+    "qi": true
   },
   "workclass": {
     "qi": true,
     "category": true
   },
-  "finalWeight": {
-    "qi": false,
-    "category": false
-  },
-  "education": {
-    "qi": false,
-    "category": false
-  },
+  "finalWeight": {},
+  "education": {},
   "educationNum": {
-    "qi": true,
-    "category": false
+    "qi": true
   },
   "maritalStatus": {
     "qi": true,
@@ -27,10 +19,7 @@
     "qi": true,
     "category": true
   },
-  "relationship": {
-    "qi": false,
-    "category": false
-  },
+  "relationship": {},
   "race": {
     "qi": true,
     "category": true
@@ -39,24 +28,14 @@
     "qi": true,
     "category": true
   },
-  "capitalGain": {
-    "qi": false,
-    "category": false
-  },
-  "capitalLoss": {
-    "qi": false,
-    "category": false
-  },
-  "hoursPerWeek": {
-    "qi": false,
-    "category": false
-  },
+  "capitalGain": {},
+  "capitalLoss": {},
+  "hoursPerWeek": {},
   "nativeCountry": {
     "qi": true,
     "category": true
   },
   "class": {
-    "qi": false,
-    "category": false
+    "sensitive": true
   }
 }
