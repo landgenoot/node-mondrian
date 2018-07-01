@@ -46,10 +46,26 @@ function postProcess (data, attributes) {
  * @param {Number} k
  * @param {Boolean} strict
  */
-function mondrian () {
-  console.log(10)
+function callMondrian (data, k, strict) {
+  return new Promise((resolve, reject) => {
+    let spawn = require('child_process').spawn
+    let py = spawn('python', ['mondrian-interface.py'])
+    let dataString = ''
+
+    py.stdout.on('data', function (data) {
+      dataString += data.toString()
+    })
+    py.stdout.on('end', function () {
+      resolve(JSON.parse(dataString))
+    })
+    py.stderr.on('data', function (buf) {
+      console.log('[STR] stderr "%s"', String(buf))
+    })
+    py.stdin.write(JSON.stringify(data))
+    py.stdin.end()
+  })
 }
 
 exports.preProcess = preProcess
 exports.postProcess = postProcess
-exports.mondrian = mondrian
+exports.callMondrian = callMondrian
