@@ -1,0 +1,20 @@
+{
+  "name": "node-mondrian",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/landgenoot/node-mondrian.git"
+  },
+  "keywords": [],
+  "author": "Daan Middendorp",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/landgenoot/node-mondrian/issues"
+  },
+  "homepage": "https://github.com/landgenoot/node-mondrian#readme"
+}
