@@ -8,13 +8,13 @@
  * be transformed to Male and Female.
  * @param {Array} data
  */
-function preProcess (data) {
+// function preProcess (data) {
 
-}
+// }
 
-function postProcess (data) {
+// function postProcess (data) {
 
-}
+// }
 
 /**
  * Call the Python module in order to do the anonymization
@@ -27,4 +27,4 @@ function mondrian (data, attributes, k, strict) {
 
 }
 
-module.exports = mondrian
+export default mondrian
