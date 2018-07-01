@@ -82,7 +82,7 @@ def get_normalized_width(partition, index):
     """
     d_order = QI_ORDER[index]
     width = float(d_order[partition.high[index]]) - float(d_order[partition.low[index]])
-    return width * 1.0 / QI_RANGE[index]
+    return width * 1.0 / (QI_RANGE[index]+0.000001)
 
 
 def choose_dimension(partition):
