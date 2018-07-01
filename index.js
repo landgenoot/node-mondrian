@@ -11,7 +11,7 @@
  */
 function preProcess (data, attributes) {
   let intuitiveDict = {}
-  return data.map(record => {
+  let processedData = data.map(record => {
     let processedRecord = []
     for (let attr in attributes) {
       if (attributes[attr].qi) {
@@ -33,10 +33,34 @@ function preProcess (data, attributes) {
     }
     return processedRecord
   })
+  return {data: processedData, intuitiveDict}
 }
 
-function postProcess (data, attributes) {
-
+function postProcess (data, attributes, intuitiveDict) {
+  return data.map(record => {
+    let processedRecord = {}
+    let index = 0
+    for (let attr in attributes) {
+      if (attributes[attr].qi) {
+        if (attributes[attr].category) {
+          let beginStart = record[index].split(',')
+          let categoryIds = []
+          for (let i = beginStart[0]; i <= beginStart[1]; i++) {
+            categoryIds.push(i)
+          }
+          processedRecord[attr] = categoryIds.map(id => intuitiveDict[attr][id]).join(',')
+        } else {
+          processedRecord[attr] = record[index]
+        }
+        index++
+      }
+      if (attributes[attr].sensitive) {
+        processedRecord[attr] = record[index]
+        index++
+      }
+    }
+    return processedRecord
+  })
 }
 
 /**

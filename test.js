@@ -27,11 +27,131 @@ const processed = [
   ['28,53', '0,2', '5,14', '0,3', '0,4', '0,1', '0,1', '0,2', '>50K'],
   ['28,53', '0,2', '5,14', '0,3', '0,4', '0,1', '0,1', '0,2', '>50K']
 ]
+const postProcessed = [
+  {
+    'age': '28,53',
+    'workclass': 'State-gov,Self-emp-not-inc,Private',
+    'educationNum': '5,14',
+    'maritalStatus': 'Never-married,Married-civ-spouse,Divorced,Married-spouse-absent',
+    'occupation': 'Adm-clerical,Exec-managerial,Handlers-cleaners,Prof-specialty,Other-service',
+    'race': 'White,Black',
+    'sex': 'Male,Female',
+    'nativeCountry': 'United-States,Cuba,Jamaica',
+    'class': '<=50K'
+  },
+  {
+    'age': '28,53',
+    'workclass': 'State-gov,Self-emp-not-inc,Private',
+    'educationNum': '5,14',
+    'maritalStatus': 'Never-married,Married-civ-spouse,Divorced,Married-spouse-absent',
+    'occupation': 'Adm-clerical,Exec-managerial,Handlers-cleaners,Prof-specialty,Other-service',
+    'race': 'White,Black',
+    'sex': 'Male,Female',
+    'nativeCountry': 'United-States,Cuba,Jamaica',
+    'class': '<=50K'
+  },
+  {
+    'age': '28,53',
+    'workclass': 'State-gov,Self-emp-not-inc,Private',
+    'educationNum': '5,14',
+    'maritalStatus': 'Never-married,Married-civ-spouse,Divorced,Married-spouse-absent',
+    'occupation': 'Adm-clerical,Exec-managerial,Handlers-cleaners,Prof-specialty,Other-service',
+    'race': 'White,Black',
+    'sex': 'Male,Female',
+    'nativeCountry': 'United-States,Cuba,Jamaica',
+    'class': '<=50K'
+  },
+  {
+    'age': '28,53',
+    'workclass': 'State-gov,Self-emp-not-inc,Private',
+    'educationNum': '5,14',
+    'maritalStatus': 'Never-married,Married-civ-spouse,Divorced,Married-spouse-absent',
+    'occupation': 'Adm-clerical,Exec-managerial,Handlers-cleaners,Prof-specialty,Other-service',
+    'race': 'White,Black',
+    'sex': 'Male,Female',
+    'nativeCountry': 'United-States,Cuba,Jamaica',
+    'class': '<=50K'
+  },
+  {
+    'age': '28,53',
+    'workclass': 'State-gov,Self-emp-not-inc,Private',
+    'educationNum': '5,14',
+    'maritalStatus': 'Never-married,Married-civ-spouse,Divorced,Married-spouse-absent',
+    'occupation': 'Adm-clerical,Exec-managerial,Handlers-cleaners,Prof-specialty,Other-service',
+    'race': 'White,Black',
+    'sex': 'Male,Female',
+    'nativeCountry': 'United-States,Cuba,Jamaica',
+    'class': '<=50K'
+  },
+  {
+    'age': '28,53',
+    'workclass': 'State-gov,Self-emp-not-inc,Private',
+    'educationNum': '5,14',
+    'maritalStatus': 'Never-married,Married-civ-spouse,Divorced,Married-spouse-absent',
+    'occupation': 'Adm-clerical,Exec-managerial,Handlers-cleaners,Prof-specialty,Other-service',
+    'race': 'White,Black',
+    'sex': 'Male,Female',
+    'nativeCountry': 'United-States,Cuba,Jamaica',
+    'class': '<=50K'
+  },
+  {
+    'age': '28,53',
+    'workclass': 'State-gov,Self-emp-not-inc,Private',
+    'educationNum': '5,14',
+    'maritalStatus': 'Never-married,Married-civ-spouse,Divorced,Married-spouse-absent',
+    'occupation': 'Adm-clerical,Exec-managerial,Handlers-cleaners,Prof-specialty,Other-service',
+    'race': 'White,Black',
+    'sex': 'Male,Female',
+    'nativeCountry': 'United-States,Cuba,Jamaica',
+    'class': '<=50K'
+  },
+  {
+    'age': '28,53',
+    'workclass': 'State-gov,Self-emp-not-inc,Private',
+    'educationNum': '5,14',
+    'maritalStatus': 'Never-married,Married-civ-spouse,Divorced,Married-spouse-absent',
+    'occupation': 'Adm-clerical,Exec-managerial,Handlers-cleaners,Prof-specialty,Other-service',
+    'race': 'White,Black',
+    'sex': 'Male,Female',
+    'nativeCountry': 'United-States,Cuba,Jamaica',
+    'class': '>50K'
+  },
+  {
+    'age': '28,53',
+    'workclass': 'State-gov,Self-emp-not-inc,Private',
+    'educationNum': '5,14',
+    'maritalStatus': 'Never-married,Married-civ-spouse,Divorced,Married-spouse-absent',
+    'occupation': 'Adm-clerical,Exec-managerial,Handlers-cleaners,Prof-specialty,Other-service',
+    'race': 'White,Black',
+    'sex': 'Male,Female',
+    'nativeCountry': 'United-States,Cuba,Jamaica',
+    'class': '>50K'
+  },
+  {
+    'age': '28,53',
+    'workclass': 'State-gov,Self-emp-not-inc,Private',
+    'educationNum': '5,14',
+    'maritalStatus': 'Never-married,Married-civ-spouse,Divorced,Married-spouse-absent',
+    'occupation': 'Adm-clerical,Exec-managerial,Handlers-cleaners,Prof-specialty,Other-service',
+    'race': 'White,Black',
+    'sex': 'Male,Female',
+    'nativeCountry': 'United-States,Cuba,Jamaica',
+    'class': '>50K'
+  }
+]
+let intuitiveDict
 
 test('preProcess', t => {
-  t.deepEqual(preProcessed, preProcess(data.slice(0, 10), attributes))
+  let result = preProcess(data.slice(0, 10), attributes)
+  intuitiveDict = result.intuitiveDict
+  t.deepEqual(preProcessed, result.data)
 })
 
 test('mondrian', async t => {
   t.deepEqual(processed, await callMondrian(preProcessed, 20, false))
+})
+
+test('postProcess', async t => {
+  let post = postProcess(processed, attributes, intuitiveDict)
+  t.deepEqual(postProcessed, post)
 })
