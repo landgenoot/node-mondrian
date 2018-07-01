@@ -13,8 +13,8 @@ def read_in():
     return json.loads(lines[0])
 
 def main():
-    data = read_in()
-    result, eval_result = mondrian(data, 20, False)
+    input = read_in()
+    result, eval_result = mondrian(input['data'], input['k'], input['strict'])
     print json.dumps(result)
 
 #start process

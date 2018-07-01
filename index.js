@@ -61,7 +61,11 @@ function callMondrian (data, k, strict) {
     py.stderr.on('data', function (buf) {
       console.log('[STR] stderr "%s"', String(buf))
     })
-    py.stdin.write(JSON.stringify(data))
+    py.stdin.write(JSON.stringify({
+      data,
+      k,
+      strict
+    }))
     py.stdin.end()
   })
 }
