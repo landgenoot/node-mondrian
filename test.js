@@ -1,5 +1,5 @@
 import test from 'ava'
-import { preProcess, postProcess, callMondrian } from './index.js'
+import { preProcess, postProcess, callMondrian, callMondrianLDiversity } from './index.js'
 
 const data = require('./data/adult.json')
 const attributes = require('./data/adult-attributes.json')
@@ -148,7 +148,7 @@ test('preProcess', t => {
 })
 
 test('mondrian', async t => {
-  t.deepEqual(processed, await callMondrian(preProcessed, 20, false))
+  t.deepEqual(processed, await callMondrian(preProcessed, 10, false))
 })
 
 test('postProcess', async t => {
