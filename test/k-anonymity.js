@@ -1,8 +1,8 @@
 import test from 'ava'
-import { preProcess, postProcess, callMondrian, callMondrianLDiversity } from './index.js'
+import { preProcess, postProcess, callMondrian } from './../index.js'
 
-const data = require('./data/adult.json')
-const attributes = require('./data/adult-attributes.json')
+const data = require('./../data/adult.json')
+const attributes = require('./../data/adult-attributes.json')
 const preProcessed = [
   [39, 0, 13, 0, 0, 0, 0, 0, '<=50K'],
   [50, 1, 13, 1, 1, 0, 0, 0, '<=50K'],

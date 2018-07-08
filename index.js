@@ -69,7 +69,7 @@ function postProcess (data, attributes, intuitiveDict) {
  * @param {Number} k
  * @param {Boolean} strict
  */
-function callMondrian(data, k, strict) {
+function callMondrian (data, k, strict) {
   return new Promise((resolve, reject) => {
     let spawn = require('child_process').spawn
     let py = spawn('python', ['mondrian-interface.py'])
@@ -98,50 +98,29 @@ function callMondrian(data, k, strict) {
  * @param {Array} data
  * @param {Number} l
  */
-function callMondrianLDiversity(data, l) {
+function callMondrianLDiversity (data, l) {
   return new Promise((resolve, reject) => {
-    let spawn = require('child_process').spawn;
-    let py = spawn('python', ['mondrian_l_diversity/mondrian-l-diversity-interface.py']);
-    let dataString = '';
+    let spawn = require('child_process').spawn
+    let py = spawn('python', ['mondrian_l_diversity/mondrian-l-diversity-interface.py'])
+    let dataString = ''
 
     py.stdout.on('data', function (data) {
       dataString += data.toString()
-    });
+    })
     py.stdout.on('end', function () {
       resolve(JSON.parse(dataString))
-    });
+    })
     py.stderr.on('data', function (buf) {
       console.log('[STR] stderr "%s"', String(buf))
-    });
+    })
     py.stdin.write(JSON.stringify({
       data,
       l
-    }));
+    }))
     py.stdin.end()
   })
 }
 
-const data = [
-  [39, 0, 13, 0, 0, 0, 0, 0, '<=50K'],
-  [50, 1, 13, 1, 1, 0, 0, 0, '<=50K'],
-  [38, 2, 9, 2, 2, 0, 0, 0, '<=50K'],
-  [53, 2, 7, 1, 2, 1, 0, 0, '<=50K'],
-  [28, 2, 13, 1, 3, 1, 1, 1, '<=50K'],
-  [37, 2, 14, 1, 1, 0, 1, 0, '<=50K'],
-  [49, 2, 5, 3, 4, 1, 1, 2, '<=50K'],
-  [52, 1, 9, 1, 1, 0, 0, 0, '>50K'],
-  [31, 2, 14, 0, 3, 0, 1, 0, '>50K'],
-  [42, 2, 13, 1, 1, 0, 0, 0, '>50K']
-];
-
-const testLDiversity = async (data, l) => {
-  const result = await callMondrianLDiversity(data, l);
-  console.log(result);
-};
-
-testLDiversity(data, 3);
-
 exports.preProcess = preProcess
 exports.postProcess = postProcess
 exports.callMondrian = callMondrian
-exports.callMondrianLDiversity = callMondrianLDiversity
