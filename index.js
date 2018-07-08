@@ -101,7 +101,7 @@ function callMondrian (data, k, strict) {
 function callMondrianLDiversity (data, l) {
   return new Promise((resolve, reject) => {
     let spawn = require('child_process').spawn
-    let py = spawn('python', ['mondrian_l_diversity/mondrian-l-diversity-interface.py'])
+    let py = spawn('python', ['mondrian-l-diversity-interface.py'])
     let dataString = ''
 
     py.stdout.on('data', function (data) {
@@ -124,3 +124,4 @@ function callMondrianLDiversity (data, l) {
 exports.preProcess = preProcess
 exports.postProcess = postProcess
 exports.callMondrian = callMondrian
+exports.callMondrianLDiversity = callMondrianLDiversity

@@ -1,0 +1,38 @@
+{
+  "age": {
+    "qi": true
+  },
+  "workclass": {
+    "qi": true,
+    "category": true
+  },
+  "finalWeight": {},
+  "education": {},
+  "educationNum": {
+    "qi": true
+  },
+  "maritalStatus": {
+    "qi": true,
+    "category": true
+  },
+  "occupation": {
+    "sensiteve": true
+  },
+  "relationship": {},
+  "race": {
+    "qi": true,
+    "category": true
+  },
+  "sex": {
+    "qi": true,
+    "category": true
+  },
+  "capitalGain": {},
+  "capitalLoss": {},
+  "hoursPerWeek": {},
+  "nativeCountry": {
+    "qi": true,
+    "category": true
+  },
+  "class": {}
+}
