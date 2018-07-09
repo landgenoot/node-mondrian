@@ -144,3 +144,7 @@ test('callMondrian', async t => {
 test('postProcess', async t => {
   t.deepEqual(postProcessed, lDiversityHelpers.postProcess(processed, attributes))
 })
+
+test('endToEnd', async t => {
+  t.deepEqual(postProcessed, await lDiversity(data.slice(0, 10), attributes, 10))
+})

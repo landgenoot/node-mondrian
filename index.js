@@ -37,6 +37,12 @@ function preProcessK (data, attributes) {
   return {data: processedData, intuitiveDict}
 }
 
+/**
+ * Convert the data back to a nice JSON structure
+ * @param {Array} data
+ * @param {Object} attributes
+ * @param {Object} intuitiveDict
+ */
 function postProcessK (data, attributes, intuitiveDict) {
   return data.map(record => {
     let processedRecord = {}
@@ -68,7 +74,6 @@ function postProcessK (data, attributes, intuitiveDict) {
  * Call the Python module in order to do the anonymization
  * @param {Array} data
  * @param {Number} k
- * @param {Boolean} strict
  */
 function callMondrianK (data, k, strict) {
   return new Promise((resolve, reject) => {
@@ -134,6 +139,11 @@ function preProcessL (data, attributes) {
   return processedData
 }
 
+/**
+ * Convert the processed data back to a nice JSON structure
+ * @param {Array} data
+ * @param {Object} attributes
+ */
 function postProcessL (data, attributes) {
   return data.map(record => {
     let processedRecord = {}
@@ -182,6 +192,22 @@ function callMondrianL (data, l) {
   })
 }
 
+/**
+ * Run all the pre and post processing in order
+ * to do the anonymization.
+ * @param {Array} data
+ * @param {Object} attributes
+ * @return {Promise}
+ */
+function lDiversity (data, attributes, l) {
+  return new Promise(async (resolve, reject) => {
+    let preProcessed = preProcessL(data, attributes)
+    let processed = await callMondrianL(preProcessed, l)
+    let postProcessed = postProcessL(processed, attributes)
+    resolve(postProcessed)
+  })
+}
+
 exports.kAnonymityHelpers = {
   preProcess: preProcessK,
   postProcess: postProcessK,
@@ -195,4 +221,4 @@ exports.lDiversityHelpers = {
 }
 
 exports.kAnonymity = kAnonymity
-// exports.lDiversity = lDiversity
+exports.lDiversity = lDiversity
