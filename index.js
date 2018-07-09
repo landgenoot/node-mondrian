@@ -7,9 +7,10 @@
  * to 0, 1 during pre-processing. Then, after anonymization, 0 and 1 should
  * be transformed to Male and Female.
  * @param {Array} data
+ * @param {Object} attributes
  * @return {Array} data
  */
-function preProcess (data, attributes) {
+function preProcessK (data, attributes) {
   let intuitiveDict = {}
   let processedData = data.map(record => {
     let processedRecord = []
@@ -36,7 +37,7 @@ function preProcess (data, attributes) {
   return {data: processedData, intuitiveDict}
 }
 
-function postProcess (data, attributes, intuitiveDict) {
+function postProcessK (data, attributes, intuitiveDict) {
   return data.map(record => {
     let processedRecord = {}
     let index = 0
@@ -69,7 +70,7 @@ function postProcess (data, attributes, intuitiveDict) {
  * @param {Number} k
  * @param {Boolean} strict
  */
-function callMondrian (data, k, strict) {
+function callMondrianK (data, k, strict) {
   return new Promise((resolve, reject) => {
     let spawn = require('child_process').spawn
     let py = spawn('python', ['mondrian-interface.py'])
@@ -94,11 +95,51 @@ function callMondrian (data, k, strict) {
 }
 
 /**
+ * Run all the pre and post processing in order
+ * to do the anonymization.
+ * @param {Array} data
+ * @param {Object} attributes
+ * @return {Promise}
+ */
+function kAnonymity (data, attributes, k) {
+  return new Promise(async (resolve, reject) => {
+    let preProcessed = preProcessK(data, attributes)
+    let processed = await callMondrianK(preProcessed.data, k, false)
+    let postProcessed = postProcessK(processed, attributes, preProcessed.intuitiveDict)
+    resolve(postProcessed)
+  })
+}
+
+/**
+ * Convert to JSON to array structure and remove
+ * the unwanted columns
+ * @param {Array} data
+ * @param {Object} attributes
+ */
+function preProcessL (data, attributes) {
+  let processedData = data.map(record => {
+    let processedRecord = []
+    for (let attr in attributes) {
+      if (attributes[attr].qi) {
+        processedRecord.push(String(record[attr]))
+      }
+    }
+    for (let attr in attributes) {
+      if (attributes[attr].sensitive) {
+        processedRecord.push(String(record[attr]))
+      }
+    }
+    return processedRecord
+  })
+  return processedData
+}
+
+/**
  * Call the Python module mondrian_l_diversity in order to achieve l diversity
  * @param {Array} data
  * @param {Number} l
  */
-function callMondrianLDiversity (data, l) {
+function callMondrianL (data, l) {
   return new Promise((resolve, reject) => {
     let spawn = require('child_process').spawn
     let py = spawn('python', ['mondrian-l-diversity-interface.py'])
@@ -121,24 +162,17 @@ function callMondrianLDiversity (data, l) {
   })
 }
 
-/**
- * Run all the pre and post processing in order
- * to do the anonymization.
- * @param {Array} data
- * @param {Object} attributes
- * @return {Promise}
- */
-function kAnonymity (data, attributes, k) {
-  return new Promise(async (resolve, reject) => {
-    let preProcessed = preProcess(data, attributes)
-    let processed = await callMondrian(preProcessed.data, k, false)
-    let postProcessed = postProcess(processed, attributes, preProcessed.intuitiveDict)
-    resolve(postProcessed)
-  })
+exports.kAnonymityHelpers = {
+  preProcess: preProcessK,
+  postProcess: postProcessK,
+  callMondrian: callMondrianK
 }
 
-exports.preProcess = preProcess
-exports.postProcess = postProcess
-exports.callMondrian = callMondrian
-exports.callMondrianLDiversity = callMondrianLDiversity
+exports.lDiversityHelpers = {
+  preProcess: preProcessL,
+  // postProcess: postProcessL,
+  callMondrian: callMondrianL
+}
+
 exports.kAnonymity = kAnonymity
+// exports.lDiversity = lDiversity

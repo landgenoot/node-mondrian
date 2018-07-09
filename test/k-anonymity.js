@@ -1,5 +1,5 @@
 import test from 'ava'
-import { preProcess, postProcess, callMondrian, kAnonymity } from './../index.js'
+import { kAnonymityHelpers, kAnonymity } from './../index.js'
 
 const data = require('./../data/adult.json')
 const attributes = require('./../data/adult-attributes.json')
@@ -142,17 +142,17 @@ const postProcessed = [
 let intuitiveDict
 
 test('preProcess', t => {
-  let result = preProcess(data.slice(0, 10), attributes)
+  let result = kAnonymityHelpers.preProcess(data.slice(0, 10), attributes)
   intuitiveDict = result.intuitiveDict
   t.deepEqual(preProcessed, result.data)
 })
 
 test('mondrian', async t => {
-  t.deepEqual(processed, await callMondrian(preProcessed, 10, false))
+  t.deepEqual(processed, await kAnonymityHelpers.callMondrian(preProcessed, 10, false))
 })
 
 test('postProcess', async t => {
-  let post = postProcess(processed, attributes, intuitiveDict)
+  let post = kAnonymityHelpers.postProcess(processed, attributes, intuitiveDict)
   t.deepEqual(postProcessed, post)
 })
 

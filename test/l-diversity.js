@@ -1,9 +1,9 @@
 import test from 'ava'
-import { callMondrianLDiversity } from './../index.js'
+import { lDiversityHelpers, lDiversity } from './../index.js'
 
-// const data = require('./../data/adult.json')
+const data = require('./../data/adult.json')
 const attributes = require('./../data/adult-attributes-2.json')
-const data = [
+const preProcessed = [
   ['39', 'State-gov', '13', 'Never-married', 'White', 'Male', 'United-States', 'Adm-clerical'],
   ['50', 'Self-emp-not-inc', '13', 'Married-civ-spouse', 'White', 'Male', 'United-States', 'Exec-managerial'],
   ['38', 'Private', '9', 'Divorced', 'White', 'Male', 'United-States', 'Handlers-cleaners'],
@@ -29,6 +29,11 @@ const postProcessed = [
   ['28,53', '*', '5,14', '*', '*', '*', '*', 'Exec-managerial']
 ]
 
-test('mondrian', async t => {
-  t.deepEqual(postProcessed, await callMondrianLDiversity(data, 10))
+test('preProcess', t => {
+  let result = lDiversityHelpers.preProcess(data.slice(0, 10), attributes)
+  t.deepEqual(preProcessed, result)
+})
+
+test('callMondrian', async t => {
+  t.deepEqual(postProcessed, await lDiversityHelpers.callMondrian(preProcessed, 10))
 })
