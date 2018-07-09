@@ -1,5 +1,5 @@
 import test from 'ava'
-import { preProcess, postProcess, callMondrian } from './../index.js'
+import { preProcess, postProcess, callMondrian, kAnonymity } from './../index.js'
 
 const data = require('./../data/adult.json')
 const attributes = require('./../data/adult-attributes.json')
@@ -154,4 +154,8 @@ test('mondrian', async t => {
 test('postProcess', async t => {
   let post = postProcess(processed, attributes, intuitiveDict)
   t.deepEqual(postProcessed, post)
+})
+
+test('endToEnd', async t => {
+  t.deepEqual(postProcessed, await kAnonymity(data.slice(0, 10), attributes, 10))
 })

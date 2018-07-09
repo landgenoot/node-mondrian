@@ -121,7 +121,24 @@ function callMondrianLDiversity (data, l) {
   })
 }
 
+/**
+ * Run all the pre and post processing in order
+ * to do the anonymization.
+ * @param {Array} data
+ * @param {Object} attributes
+ * @return {Promise}
+ */
+function kAnonymity (data, attributes, k) {
+  return new Promise(async (resolve, reject) => {
+    let preProcessed = preProcess(data, attributes)
+    let processed = await callMondrian(preProcessed.data, k, false)
+    let postProcessed = postProcess(processed, attributes, preProcessed.intuitiveDict)
+    resolve(postProcessed)
+  })
+}
+
 exports.preProcess = preProcess
 exports.postProcess = postProcess
 exports.callMondrian = callMondrian
 exports.callMondrianLDiversity = callMondrianLDiversity
+exports.kAnonymity = kAnonymity
