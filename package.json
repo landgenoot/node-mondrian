@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "ava --watch"
+    "test-watch": "ava --watch",
+    "test": "ava"
   },
   "repository": {
     "type": "git",
