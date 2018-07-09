@@ -134,6 +134,26 @@ function preProcessL (data, attributes) {
   return processedData
 }
 
+function postProcessL (data, attributes) {
+  return data.map(record => {
+    let processedRecord = {}
+    let index = 0
+    for (let attr in attributes) {
+      if (attributes[attr].qi) {
+        processedRecord[attr] = record[index]
+        index++
+      }
+    }
+    for (let attr in attributes) {
+      if (attributes[attr].sensitive) {
+        processedRecord[attr] = record[index]
+        index++
+      }
+    }
+    return processedRecord
+  })
+}
+
 /**
  * Call the Python module mondrian_l_diversity in order to achieve l diversity
  * @param {Array} data
@@ -170,7 +190,7 @@ exports.kAnonymityHelpers = {
 
 exports.lDiversityHelpers = {
   preProcess: preProcessL,
-  // postProcess: postProcessL,
+  postProcess: postProcessL,
   callMondrian: callMondrianL
 }
 

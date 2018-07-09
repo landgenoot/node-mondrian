@@ -16,7 +16,7 @@ const preProcessed = [
   ['42', 'Private', '13', 'Married-civ-spouse', 'White', 'Male', 'United-States', 'Exec-managerial']
 ]
 
-const postProcessed = [
+const processed = [
   ['28,53', '*', '5,14', '*', '*', '*', '*', 'Adm-clerical'],
   ['28,53', '*', '5,14', '*', '*', '*', '*', 'Exec-managerial'],
   ['28,53', '*', '5,14', '*', '*', '*', '*', 'Handlers-cleaners'],
@@ -29,11 +29,118 @@ const postProcessed = [
   ['28,53', '*', '5,14', '*', '*', '*', '*', 'Exec-managerial']
 ]
 
+const postProcessed = [
+  {
+    'age': '28,53',
+    'workclass': '*',
+    'educationNum': '5,14',
+    'maritalStatus': '*',
+    'race': '*',
+    'sex': '*',
+    'nativeCountry': '*',
+    'occupation': 'Adm-clerical'
+  },
+  {
+    'age': '28,53',
+    'workclass': '*',
+    'educationNum': '5,14',
+    'maritalStatus': '*',
+    'race': '*',
+    'sex': '*',
+    'nativeCountry': '*',
+    'occupation': 'Exec-managerial'
+  },
+  {
+    'age': '28,53',
+    'workclass': '*',
+    'educationNum': '5,14',
+    'maritalStatus': '*',
+    'race': '*',
+    'sex': '*',
+    'nativeCountry': '*',
+    'occupation': 'Handlers-cleaners'
+  },
+  {
+    'age': '28,53',
+    'workclass': '*',
+    'educationNum': '5,14',
+    'maritalStatus': '*',
+    'race': '*',
+    'sex': '*',
+    'nativeCountry': '*',
+    'occupation': 'Handlers-cleaners'
+  },
+  {
+    'age': '28,53',
+    'workclass': '*',
+    'educationNum': '5,14',
+    'maritalStatus': '*',
+    'race': '*',
+    'sex': '*',
+    'nativeCountry': '*',
+    'occupation': 'Prof-specialty'
+  },
+  {
+    'age': '28,53',
+    'workclass': '*',
+    'educationNum': '5,14',
+    'maritalStatus': '*',
+    'race': '*',
+    'sex': '*',
+    'nativeCountry': '*',
+    'occupation': 'Exec-managerial'
+  },
+  {
+    'age': '28,53',
+    'workclass': '*',
+    'educationNum': '5,14',
+    'maritalStatus': '*',
+    'race': '*',
+    'sex': '*',
+    'nativeCountry': '*',
+    'occupation': 'Other-service'
+  },
+  {
+    'age': '28,53',
+    'workclass': '*',
+    'educationNum': '5,14',
+    'maritalStatus': '*',
+    'race': '*',
+    'sex': '*',
+    'nativeCountry': '*',
+    'occupation': 'Exec-managerial'
+  },
+  {
+    'age': '28,53',
+    'workclass': '*',
+    'educationNum': '5,14',
+    'maritalStatus': '*',
+    'race': '*',
+    'sex': '*',
+    'nativeCountry': '*',
+    'occupation': 'Prof-specialty'
+  },
+  {
+    'age': '28,53',
+    'workclass': '*',
+    'educationNum': '5,14',
+    'maritalStatus': '*',
+    'race': '*',
+    'sex': '*',
+    'nativeCountry': '*',
+    'occupation': 'Exec-managerial'
+  }
+]
+
 test('preProcess', t => {
   let result = lDiversityHelpers.preProcess(data.slice(0, 10), attributes)
   t.deepEqual(preProcessed, result)
 })
 
 test('callMondrian', async t => {
-  t.deepEqual(postProcessed, await lDiversityHelpers.callMondrian(preProcessed, 10))
+  t.deepEqual(processed, await lDiversityHelpers.callMondrian(preProcessed, 10))
+})
+
+test('postProcess', async t => {
+  t.deepEqual(postProcessed, lDiversityHelpers.postProcess(processed, attributes))
 })
