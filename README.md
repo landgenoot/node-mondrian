@@ -1,5 +1,5 @@
 # Node-mondrian
-k-anonymity and l-diversity for nodeJS. Using (Mondrian)[https://github.com/qiyuangong/Mondrian] and (Mondrian_L_Diversity)[https://github.com/qiyuangong/Mondrian_L_Diversity] under the hood.
+k-anonymity and l-diversity for nodeJS. Using [Mondrian](https://github.com/qiyuangong/Mondrian) and [Mondrian_L_Diversity](https://github.com/qiyuangong/Mondrian_L_Diversity) under the hood.
 ## Usage
 Install with
 ```
