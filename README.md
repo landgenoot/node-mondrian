@@ -2,12 +2,12 @@
 k-anonymity and l-diversity for nodeJS. Using [Mondrian](https://github.com/qiyuangong/Mondrian) and [Mondrian_L_Diversity](https://github.com/qiyuangong/Mondrian_L_Diversity) under the hood. Developed as part of the [Privacy Engineering](https://www.ise.tu-berlin.de/menue/lehre/module/privacy_engineering/) course at the TU Berlin.
 ## Usage
 ### Install
-```
+```bash
 npm install node-mondrian
 ```
 
 ### Example
-```
+```javascript
 const Mondrian = require('node-mondrian')
 
 // See this repo for example data
@@ -19,6 +19,6 @@ let diversified = await Mondrian.lDiversity(anonymized, attributes, 10)
 ```
 
 ### Testing
-```
+```bash
 npm test
 ```
