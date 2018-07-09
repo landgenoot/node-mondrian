@@ -1,5 +1,5 @@
 import test from 'ava'
-import { kAnonymityHelpers, kAnonymity } from './../index.js'
+import { kAnonymityHelpers, kAnonymity } from './../lib/kAnonymity.js'
 
 const data = require('./../data/adult.json')
 const attributes = require('./../data/adult-attributes.json')

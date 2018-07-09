@@ -4,7 +4,7 @@ Bridge between nodeJS and python in order to run Mondrian
 
 # !/usr/bin/env python
 # coding=utf-8
-from mondrian.mondrian import mondrian
+from python_lib.mondrian.mondrian import mondrian
 import sys, copy, random, pdb, json
 
 #Read data from stdin

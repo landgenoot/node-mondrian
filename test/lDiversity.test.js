@@ -1,5 +1,5 @@
 import test from 'ava'
-import { lDiversityHelpers, lDiversity } from './../index.js'
+import { lDiversityHelpers, lDiversity } from './../lib/lDiversity.js'
 
 const data = require('./../data/adult.json')
 const attributes = require('./../data/adult-attributes-2.json')

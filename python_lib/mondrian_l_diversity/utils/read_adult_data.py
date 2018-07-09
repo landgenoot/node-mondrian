@@ -10,9 +10,9 @@ read adult data
 # 'relationship', 'race', 'sex', 'capital_gain', 'capital_loss', 'hours_per_week', 'native_country', 'class']
 # QID ['age', 'workcalss', 'education', 'matrital_status', 'race', 'sex', 'native_country']
 # SA ['occopation']
-from mondrian_l_diversity.models.gentree import GenTree
-from mondrian_l_diversity.models.numrange import NumRange
-from mondrian_l_diversity.utils.utility import cmp_str
+from python_lib.mondrian_l_diversity.models.gentree import GenTree
+from python_lib.mondrian_l_diversity.models.numrange import NumRange
+from python_lib.mondrian_l_diversity.utils.utility import cmp_str
 import pickle
 
 import pdb
@@ -44,7 +44,7 @@ def read_data():
         numeric_dict.append(dict())
     # oder categorical attributes in intuitive order
     # here, we use the appear number
-    data_file = open('mondrian_l_diversity/adult.data', 'rU')
+    data_file = open('python_lib/mondrian_l_diversity/adult.data', 'rU')
     for line in data_file:
         line = line.strip()
         # remove empty and incomplete lines
@@ -68,7 +68,7 @@ def read_data():
     # pickle numeric attributes and get NumRange
     for i in range(QI_num):
         if IS_CAT[i] is False:
-            static_file = open('data/adult_' + ATT_NAMES[QI_INDEX[i]] + '_static.pickle', 'wb')
+            static_file = open('python_lib/data/adult_' + ATT_NAMES[QI_INDEX[i]] + '_static.pickle', 'wb')
             sort_value = list(numeric_dict[i].keys())
             sort_value.sort(cmp=cmp_str)
             pickle.dump((numeric_dict[i], sort_value), static_file)
@@ -97,7 +97,7 @@ def read_pickle_file(att_name):
     return numrange object
     """
     try:
-        static_file = open('mondrian_l_diversity/data/adult_' + att_name + '_static.pickle', 'rb')
+        static_file = open('python_lib/mondrian_l_diversity/data/adult_' + att_name + '_static.pickle', 'rb')
         (numeric_dict, sort_value) = pickle.load(static_file)
     except:
         print "Pickle file not exists!!"
@@ -111,7 +111,7 @@ def read_tree_file(treename):
     """
     leaf_to_path = {}
     att_tree = {}
-    prefix = 'mondrian_l_diversity/data/adult_'
+    prefix = 'python_lib/mondrian_l_diversity/data/adult_'
     postfix = ".txt"
     treefile = open(prefix + treename + postfix, 'rU')
     att_tree['*'] = GenTree('*')

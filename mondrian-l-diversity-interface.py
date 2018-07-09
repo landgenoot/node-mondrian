@@ -4,8 +4,8 @@ Bridge between nodeJS and python in order to run Mondrian L Diversity
 
 # !/usr/bin/env python
 # coding=utf-8
-from mondrian_l_diversity.mondrian_l_diversity import mondrian_l_diversity
-from mondrian_l_diversity.utils.read_adult_data import read_tree
+from python_lib.mondrian_l_diversity.mondrian_l_diversity import mondrian_l_diversity
+from python_lib.mondrian_l_diversity.utils.read_adult_data import read_tree
 import sys, copy, random, pdb, json
 
 #Read data from stdin
