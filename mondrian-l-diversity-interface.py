@@ -75,7 +75,7 @@ def compose_numrange(column):
 def main():
     input = read_in()
     att_trees = read_tree(input['attributes'], input['data'])
-    result, eval_result = mondrian_l_diversity(att_trees, input['data'], input['l'])
+    result = mondrian_l_diversity(att_trees, input['data'], input['l'])[0]
     print json.dumps(result)
 
 #start process

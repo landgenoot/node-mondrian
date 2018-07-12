@@ -14,7 +14,7 @@ def read_in():
 
 def main():
     input = read_in()
-    result, eval_result = mondrian(input['data'], input['k'], input['strict'])
+    result = mondrian(input['data'], input['k'], input['strict'])[0]
     print json.dumps(result)
 
 #start process
