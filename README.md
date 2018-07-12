@@ -20,6 +20,7 @@ let anonymized = await Mondrian.kAnonymity(data, attributes, 10)
 let diversified = await Mondrian.lDiversity(anonymized, attributes, 10)
 
 ```
+Results in:
 ```json
 [
   {
