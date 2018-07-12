@@ -37,12 +37,21 @@ def read_tree(attributes, data):
     return att_trees
 
 def get_column_categories(data, index):
+    """
+    Get distinct values of column
+    """
     return list(set(map(lambda item: item[index], data)))
 
 def get_column(data, index):
+    """
+    Get single column
+    """
     return list(map(lambda item: item[index], data))
 
 def compose_tree(attribute, categories):
+    """
+    Create two-level tree with star and category
+    """
     att_tree = {}
     att_tree['*'] = GenTree('*')
     for category in categories:
@@ -50,6 +59,9 @@ def compose_tree(attribute, categories):
     return att_tree
 
 def compose_numrange(column):
+    """
+    Create numrange based on frequency
+    """
     numeric_dict = dict()
     for row in column:
         try:
@@ -59,7 +71,6 @@ def compose_numrange(column):
     sort_value = list(numeric_dict.keys())
     sort_value.sort(cmp=cmp_str)
     return NumRange(sort_value, numeric_dict)
-
 
 def main():
     input = read_in()
