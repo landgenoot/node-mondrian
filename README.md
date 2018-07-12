@@ -37,7 +37,6 @@ let diversified = await Mondrian.lDiversity(anonymized, attributes, 10)
     "workclass": "*",
     "educationNum": "5,14",
     "maritalStatus": "*",
-....
 ```
 
 ### Testing
