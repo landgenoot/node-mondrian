@@ -138,7 +138,7 @@ test('preProcess', t => {
 })
 
 test('callMondrian', async t => {
-  t.deepEqual(processed, await lDiversityHelpers.callMondrian(preProcessed, 10))
+  t.deepEqual(processed, await lDiversityHelpers.callMondrian(preProcessed, attributes, 10))
 })
 
 test('postProcess', async t => {
