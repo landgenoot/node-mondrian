@@ -17,7 +17,27 @@ const data = require('data/adult.json')
 const attributes = require('data/adult-attributes.json')
 
 let anonymized = await Mondrian.kAnonymity(data, attributes, 10) 
-let diversified = await Mondrian.lDiversity(anonymized, attributes, 10)
+let diversified = await Mondrian.lDiversity(data, attributes, 10)
+
+```
+Results in:
+```json
+[
+  {
+    "age": "28,53",
+    "workclass": "*",
+    "educationNum": "5,14",
+    "maritalStatus": "*",
+    "race": "*",
+    "sex": "*",
+    "nativeCountry": "*",
+    "occupation": "Adm-clerical"
+  },
+  {
+    "age": "28,53",
+    "workclass": "*",
+    "educationNum": "5,14",
+    "maritalStatus": "*",
 ```
 
 ### Testing
